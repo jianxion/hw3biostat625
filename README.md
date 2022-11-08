@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/jianxion/hw3biostat625/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jianxion/hw3biostat625/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/jianxion/hw3biostat625/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jianxion/hw3biostat625?branch=master)
 <!-- badges: end -->
 
 The goal of hw3biostat625 is to …
