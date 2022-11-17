@@ -1,3 +1,21 @@
+#'Linear Regression Model
+#'
+#'Gets the coefficient from a linear regression model
+#'
+#'@param x input value (a dataframe contains all observations in selected columns from a dataset)
+#'@param y input value the target variable to fit the linear regression model on
+#'
+#'@return the table contains all coefficients of the linear regression model
+#'
+#'@examples
+#'x = mtcars[, c(3,4,5)]
+#'y = mtcars$mpg
+#'mymodel = my.lm(x, y)
+#'mymodel
+#'
+#'@export
+#'
+
 my.lm = function(x, y) {
 
   X = cbind(1, x)
