@@ -45,8 +45,6 @@ adjusted R-squared value, F statistic with degree of freedom, and three plots to
 diagnostic to check the assumptions of linear regression model.
 }
 \examples{
-## A linear regression model to test the effect of disp,
-hp and drat on mpg.
 x = mtcars[, c(3,4,5)]
 y = mtcars$mpg
 mymodel <- my.lm(x, y)

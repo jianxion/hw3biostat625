@@ -27,8 +27,6 @@
 #'the residuals squared are randomly distributed around 0.}
 #'
 #'@examples
-#'## A linear regression model to test the effect of disp,
-#'hp and drat on mpg.
 #'x = mtcars[, c(3,4,5)]
 #'y = mtcars$mpg
 #'mymodel <- my.lm(x, y)
