@@ -1,5 +1,5 @@
 ---
-title: "tutorial"
+title: "Introduction to my.lm function"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{tutorial}
@@ -7,13 +7,76 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+
+
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+library(bench)
+library(gmp)
 ```
+
+Since this is just a practice for creating a r package, this package only
+contains one function called my.lm(). This function basically does the same job
+as R built-in summary.lm() function, but the output will also contain three 
+plots to help you check the assumptions of a linear regression model.
+
+After installing this r package, type this command to utilize functions inside the package.
 
 ```{r setup}
 library(hw3biostat625)
 ```
+
+## Data: mtcars
+To explore the usage of the my.lm() function, we'll use the R built-in dataset mtcars
+as an example. Here is a brief overview of this dataset.
+
+```{r}
+head(mtcars)
+dim(mtcars)
+summary(mtcars)
+```
+
+## Use the `my.lm()` function
+```{r}
+x = mtcars[, c(3,4,5)]
+
+y = mtcars$mpg
+
+mymodel <- my.lm(x, y)
+```
+
+
+
+## Compare with R built-in `lm()` function
+```{r, message = FALSE}
+model = lm(mpg ~ disp + hp + drat, data = mtcars)
+
+summary(model)$coef
+
+all.equal(mymodel[,1] , summary(model)$coef[,1])
+
+all.equal(mymodel[,2] , summary(model)$coef[,2])
+
+all.equal(mymodel[,3] , summary(model)$coef[,3])
+
+all.equal(mymodel[,4] , summary(model)$coef[,4])
+
+all.equal(mymodel , summary(model)$coef)
+```
+
+
+
+```{r, message = FALSE}
+result = bench::mark(mymodel, summary(model)$coef)
+print(result)
+```
+
+
+
+
+
+
+
+
+
+
