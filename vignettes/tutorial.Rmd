@@ -11,6 +11,8 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(collapse = T, comment = "#>")
+if(!require(bench)) install.packages("bench",repos = "http://cran.us.r-project.org")
+
 ```
 
 Since this is just a practice for creating a r package, this package only
