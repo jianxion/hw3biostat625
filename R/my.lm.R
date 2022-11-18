@@ -10,12 +10,12 @@
 #'@param y The target variable to fit the linear regression model on.
 #'
 #'@return \item{coefficients}{a p x 4 matrix with columns for the estimated coefficients, standard
-#'error, t-statistic and the p value(95% confidence level).}
+#'error, t-statistic and the p value}
 #'@return \item{R-squared value}{A value which is calculated by SSR/SSY. It can be interpreted as the
 #'percentage of variance that can be explained by the model. Higher R-squared value means the model
 #'fits better.}
 #'@return \item{F statistic}{This value shows if there is any of the selected variables in your input
-#'x is related to y. This value is calculated by (R^2/1-R^2)*(df2/df1)}
+#'x is related to y. This value is calculated by `(R^2/1-R^2)*(df2/df1)`}
 #'@return \item{df2}{The degree of freedom of error, which is calculated by n-p}
 #'@return \item{df1}{The degree of freedom of regression, which is calculated by p-1}
 #'@return \item{Adjusted R-squared value}{When we have too many covariates, the R-squared value will
@@ -139,30 +139,3 @@ my.lm = function(x, y) {
 }
 
 
-
-
-
-
-
-
-model = lm(mpg ~ disp + hp + drat, data = mtcars)
-
-summary(model)$coef
-
-x = mtcars[, c(3,4,5)]
-
-y = mtcars$mpg
-
-mymodel = my.lm(x, y)
-
-mymodel
-
-all.equal(mymodel[,1] , summary(model)$coef[,1])
-
-all.equal(mymodel[,2] , summary(model)$coef[,2])
-
-all.equal(mymodel[,3] , summary(model)$coef[,3])
-
-all.equal(mymodel[,4] , summary(model)$coef[,4])
-
-all.equal(mymodel , summary(model)$coef)

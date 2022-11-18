@@ -13,14 +13,15 @@ are the covariates that you are interested in.}
 \item{y}{The target variable to fit the linear regression model on.}
 }
 \value{
-
+\item{coefficients}{a p x 4 matrix with columns for the estimated coefficients, standard
+error, t-statistic and the p value}
 
 \item{R-squared value}{A value which is calculated by SSR/SSY. It can be interpreted as the
 percentage of variance that can be explained by the model. Higher R-squared value means the model
 fits better.}
 
 \item{F statistic}{This value shows if there is any of the selected variables in your input
-x is related to y. This value is calculated by (R^2/1-R^2)*(df2/df1)}
+x is related to y. This value is calculated by `(R^2/1-R^2)*(df2/df1)`}
 
 \item{df2}{The degree of freedom of error, which is calculated by n-p}
 
