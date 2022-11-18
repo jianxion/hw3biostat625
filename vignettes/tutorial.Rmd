@@ -11,8 +11,6 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(collapse = T, comment = "#>")
-if (!require("bench")) install.packages("bench")
-library(bench)
 ```
 
 Since this is just a practice for creating a r package, this package only
@@ -67,6 +65,7 @@ all.equal(mymodel , summary(model)$coef)
 
 
 ```{r, message = FALSE}
+library(bench)
 result = bench::mark(mymodel, summary(model)$coef)
 print(result)
 ```
