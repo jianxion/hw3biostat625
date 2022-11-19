@@ -36,15 +36,21 @@ dim(mtcars)
 summary(mtcars)
 ```
 
-## Use the `my.lm()` function
+## Example of using the `my.lm()` function
 ```{r}
 x = mtcars[, c(3,4,5)]
-
 y = mtcars$mpg
-
 mymodel <- my.lm(x, y)
 ```
 
+The input of this function contains two elements. The first input is a dataframe with all rows as observations and all columns as predictors you are going to include in the linear model. The dimension of this dataframe is supposed to be n x (p-1) in a multiple linear regression model. The
+second input is the target variable that you are going to fit the regression model on. This is a
+dataframe with dimension of n x 1. After you apply the `my.lm()` function, a table contains four
+columns of the model estimated coefficients, standard deviations, t values and p values will be printed on the screen. In addition, you will also see the R-squared value, F statistic with degree
+of freedoms, and adjusted R-squared value. Different from the R built-in lm function, the `my.lm()`
+function will also output three plots, which are residuals vs. fitted values plot, residuals squared
+vs. fitted values plot, and the normal Q-Q plot. These plots are aimed to help you check the basic
+assumptions of the linear regression model, which are LINE (linearity, Independence, Normality and Equal variance). The two plots with residuals help you detect non-linearity, unequal error variances, and outliers by observing the distribution of residuals around zero. If the residuals are randomly distributed around 0, the assumptions are satisfied. The normal Q-Q plot helps you check the assumption of normality. If all the data points lie approximately on a straight line, you can say that the observations are nearly normally distributed.
 
 
 ## Compare with R built-in `lm()` function
@@ -64,15 +70,21 @@ all.equal(mymodel[,4] , summary(model)$coef[,4])
 all.equal(mymodel , summary(model)$coef)
 ```
 
-
+Here I used the R built-in `lm()` function to fit a linear regression model with the same inputs as
+the example using `my.lm()` function above. By using the `all.equal()` function, I confirmed that 
+both the `my.lm()` function gives us the same output as the R built-in `lm()` function. In other words, both of these two functions are correct.
 
 ```{r, message = FALSE}
 library(bench)
+
 result = bench::mark(mymodel, summary(model)$coef)
+
 print(result)
 ```
 
-
+Given that we already knew that both of these two functions are correct, which one is faster? Here I used the `bench::mark()` function to simulate the time that R takes to calculate the result. From the output above we noticed that the the minimum and median time that `my.lm()` function used is
+significantly shorter than the `lm()` function. This observation shows the efficiency of this
+`my.lm()` function.
 
 
 
