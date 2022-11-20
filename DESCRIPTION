@@ -4,8 +4,8 @@ Title: Linear Regression Model
 Version: 0.1.0
 Author: Jianxiong Shen
 Maintainer: The package maintainer <jianxion@umich.edu>
-Description: The package contains one function called my.lm(), which helps you
-to fit a linear regression model on a dataset. 
+Description: This package contains one function to help you fit a linear model
+    on a dataset and perform residual analysis.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

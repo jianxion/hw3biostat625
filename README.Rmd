@@ -20,7 +20,14 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/jianxion/hw3biostat625/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jianxion/hw3biostat625?branch=master)
 <!-- badges: end -->
 
-The goal of hw3biostat625 is to ...
+## Overview
+Since this is just a practice for creating a r package, this package only
+contains one function called `my.lm()`. This function helps you to fit a simple
+or multiple linear regression on a dataset. The output will contain a table of
+coefficients, calculated R-squared and ajusted R-squared value, F statistic with
+degree of freedoms. These outputs are the same as R built-in summary.lm() function
+gives you, but the `my.lm()` function's output will also contain three 
+plots to help you check the assumptions of "LINE"" of a linear regression model.
 
 ## Installation
 
@@ -40,10 +47,14 @@ library(hw3biostat625)
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+Here is an example of fitting a multiple linear regression model on the
+mtcars dataset. The target variable is mpg and the predictors are disp, hp,
+and drat. 
 
 ```{r cars}
-summary(cars)
+x = mtcars[, c(3,4,5)]
+y = mtcars$mpg
+mymodel <- my.lm(x, y)
 ```
 
 You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.

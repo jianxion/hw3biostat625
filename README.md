@@ -10,7 +10,16 @@
 coverage](https://codecov.io/gh/jianxion/hw3biostat625/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jianxion/hw3biostat625?branch=master)
 <!-- badges: end -->
 
-The goal of hw3biostat625 is to …
+## Overview
+
+Since this is just a practice for creating a r package, this package
+only contains one function called `my.lm()`. This function helps you to
+fit a simple or multiple linear regression on a dataset. The output will
+contain a table of coefficients, calculated R-squared and ajusted
+R-squared value, F statistic with degree of freedoms. These outputs are
+the same as R built-in summary.lm() function gives you, but the
+`my.lm()` function’s output will also contain three plots to help you
+check the assumptions of “LINE”” of a linear regression model.
 
 ## Installation
 
@@ -31,19 +40,34 @@ library(hw3biostat625)
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+Here is an example of fitting a multiple linear regression model on the
+mtcars dataset. The target variable is mpg and the predictors are disp,
+hp, and drat.
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+x = mtcars[, c(3,4,5)]
+y = mtcars$mpg
+mymodel <- my.lm(x, y)
+#> [1] "The model estimated coefficients and standard deviations, t values and p values:"
+#>                Estimate  Std. Error   t value    Pr(>|t|)
+#> (Intercept) 19.34429256 6.370882214  3.036360 0.005133133
+#> disp        -0.01923223 0.009371402 -2.052225 0.049602794
+#> hp          -0.03122932 0.013344973 -2.340156 0.026630980
+#> drat         2.71497521 1.487366167  1.825358 0.078632122
 ```
+
+<img src="man/figures/README-cars-1.png" width="100%" /><img src="man/figures/README-cars-2.png" width="100%" /><img src="man/figures/README-cars-3.png" width="100%" />
+
+    #> [1] "R-squared value is"
+    #> [1] 0.7750131
+    #> [1] "F statistic is"
+    #> [1] 32.15056
+    #> [1] "With degrees of freedom on df1:"
+    #> [1] 3
+    #> [1] "And df2:"
+    #> [1] 28
+    #> [1] "Adjusted R-squared value is"
+    #> [1] 0.7509073
 
 You’ll still need to render `README.Rmd` regularly, to keep `README.md`
 up-to-date. `devtools::build_readme()` is handy for this. You could also
