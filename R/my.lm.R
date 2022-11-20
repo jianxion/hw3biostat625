@@ -18,7 +18,7 @@
 #'x is related to y. This value is calculated by `(R^2/1-R^2)*(df2/df1)`}
 #'@return \item{df2}{The degree of freedom of error, which is calculated by n-p}
 #'@return \item{df1}{The degree of freedom of regression, which is calculated by p-1}
-#'@return \item{Adjusted R-squared value}{When we have too many covariates, the R-squared value will
+#'@return \item{Adjusted R-squared value}{When we have too many predictors, the R-squared value will
 #'be penalized, this new value is called adjusted R-squared value}
 #'@return \item{Residuals squared vs. fitted values plot}{This plot is used to check if
 #'the residuals are randomly distributed around 0.}
@@ -37,6 +37,8 @@
 my.lm = function(x, y) {
   N = nrow(x)
   n = length(y)
+
+  # detect wrong inputs and generate error messages
   if(N != n) {
     print("Dimensions are not corret")
     return(NULL)
@@ -56,15 +58,21 @@ my.lm = function(x, y) {
     print("Need numeric response")
     return(NULL)
   }
+
+  # represent x and y as matrix
   X = cbind(1, x)
   X = as.matrix(X)
   y = as.numeric(y)
+
+  # calculate betahat and yhat
   XT = t(X)
   XTX = XT %*% X
   INVXTX = solve(XTX)
   XTy = t(X) %*% y
   betahat = INVXTX %*% XTy
   yhat =  X %*% betahat
+
+  # calculate R^2
   res = y - yhat
   meany = mean(y)
   s = (y -  meany)^2
@@ -73,6 +81,8 @@ my.lm = function(x, y) {
   SSE = sum(s2)
   SSR = SST - SSE
   R2 = SSR / SST
+
+  # calculate t values
   n = length(y)
   p = ncol(X) - 1
   df = (n - p - 1)
@@ -85,6 +95,8 @@ my.lm = function(x, y) {
   pt = pt(abs(tvalues),
           df = df)
   pvalues = 2 * (1 - pt)
+
+  # create the output coefficients table
   betahat =  betahat[,1]
   sds = ses
   ts = tvalues
@@ -104,18 +116,26 @@ my.lm = function(x, y) {
   row.names(mytable)[1] = "(Intercept)"
   print("The model estimated coefficients and standard deviations, t values and p values:")
   print(mytable)
+
+  # print residuals vs. fitted values plot
   plot(res ~ yhat,
        xlab = "fitted values",
        ylab = "residuals",
        main = "Residuals vs. fitted values plot")
   abline(h = 0, lty = 2)
+
+  # print normal qq plot
   qqnorm(res)
   qqline(res)
+
+  # print residuals squared vs. fitted values plot
   plot(res^2 ~ yhat,
        xlab = "fitted values",
        ylab = "residuals squared",
        main = "Residuals squared vs. fitted values plot")
   abline(h = 0, lty = 2)
+
+  # generate other statistics
   print("R-squared value is")
   print(R2)
   df2 = n - p - 1
@@ -135,5 +155,6 @@ my.lm = function(x, y) {
   print(adjr2)
   return(mytable)
 }
+
 
 

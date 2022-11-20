@@ -27,7 +27,7 @@ x is related to y. This value is calculated by `(R^2/1-R^2)*(df2/df1)`}
 
 \item{df1}{The degree of freedom of regression, which is calculated by p-1}
 
-\item{Adjusted R-squared value}{When we have too many covariates, the R-squared value will
+\item{Adjusted R-squared value}{When we have too many predictors, the R-squared value will
 be penalized, this new value is called adjusted R-squared value}
 
 \item{Residuals squared vs. fitted values plot}{This plot is used to check if
